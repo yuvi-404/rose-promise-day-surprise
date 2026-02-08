@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Songs For You 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+    color: white;
+    overflow-x: hidden;
+    background: radial-gradient(circle at top, #3a0066, #000);
+}
+
+/* 🌌 Stars */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: starsMove 70s linear infinite;
+    opacity: 0.4;
+    z-index: -2;
+}
+@keyframes starsMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1200px); }
+}
+
+/* 💖 Glowy Heading */
+.glowText {
+    font-size: 30px;
+    margin-top: 50px;
+    text-shadow: 0 0 10px #ff7edb, 0 0 20px #ff7edb, 0 0 30px #ff7edb;
+}
+
+/* 🎵 Song cards */
+.songCard {
+    background: rgba(255,255,255,0.08);
+    border-radius: 15px;
+    padding: 20px;
+    margin: 30px auto;
+    max-width: 360px;
+    box-shadow: 0 0 15px #ff7edb;
+}
+
+/* ✨ Sparkles */
+.sparkle {
+    position: fixed;
+    font-size: 20px;
+    animation: pop 1.5s ease-out forwards;
+}
+@keyframes pop {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(2); opacity: 0; }
+}
+
+/* 💫 Final button */
+#finalBtn {
+    margin: 40px auto;
+    padding: 15px 35px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    background: linear-gradient(45deg,#ff9a9e,#fad0c4);
+    box-shadow: 0 0 20px white;
+    cursor: pointer;
+    animation: glowPulse 1.5s infinite alternate;
+}
+
+@keyframes glowPulse {
+    from { box-shadow: 0 0 10px #fff; }
+    to { box-shadow: 0 0 25px #ff7edb; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="glowText">Songs that reminds me of you &lt;3</div>
+
+<div class="songCard">
+    <h3>🌹 Rose Day Song</h3>
+    <p><b>Out of My League – Fitz & The Tantrums</b></p>
+
+    <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/5qEn8c0MBzyRKgQq91Vevi"
+        width="100%" height="80" frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+
+    <p>🌹 “That feeling when someone feels unbelievably special… like meeting a dream you never thought you'd hold.”</p>
+</div>
+
+<div class="songCard">
+    <h3>💍 Propose Day Song</h3>
+    <p><b>Sparks – Coldplay</b></p>
+
+    <iframe style="border-radius:12px"
+        src="https://open.spotify.com/embed/track/7D0RhFcb3CrfPuTJ0obrod"
+        width="100%" height="80" frameBorder="0"
+        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+    </iframe>
+
+    <p>💍 “A quiet love that speaks without noise… soft, deep, and meant to stay.”</p>
+</div>
+
+<button id="finalBtn" onclick="openFinal()">💖 Final Surprise</button>
+
+<script>
+document.addEventListener("click", function(){
+    for(let i=0;i<18;i++){
+        let s=document.createElement("div");
+        s.className="sparkle";
+        s.innerText="✨";
+        s.style.left=Math.random()*100+"vw";
+        s.style.top=Math.random()*100+"vh";
+        document.body.appendChild(s);
+        setTimeout(()=>s.remove(),1500);
+    }
+});
+
+function openFinal(){
+    window.open("final.html","_blank");
+}
+</script>
+
+</body>
+</html>

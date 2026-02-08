@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For You ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    color: white;
+    text-align: center;
+    background: radial-gradient(circle at top, #0b0f2b, #000);
+    transition: background 1s;
+}
+
+/* 🌌 Stars */
+body::before {
+    content: "";
+    position: fixed;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: starsMove 60s linear infinite;
+    opacity: 0.4;
+    z-index: -2;
+}
+@keyframes starsMove {
+    from { transform: translateY(0); }
+    to { transform: translateY(-1000px); }
+}
+
+/* 🌧 Rain */
+.rain {
+    position: fixed;
+    top: 0;
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(transparent, #8be9fd);
+    animation: fall linear infinite;
+    z-index: -1;
+}
+@keyframes fall { to { transform: translateY(100vh); } }
+
+h1 { margin-top: 40px; text-shadow: 0 0 15px #ff7edb; }
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 40px;
+}
+
+.envelope {
+    width: 180px;
+    height: 120px;
+    background: linear-gradient(135deg, #ff7eb3, #ff758c);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 0 15px pink;
+    transition: transform 0.3s;
+}
+.envelope:hover { transform: scale(1.1); }
+
+.message {
+    display: none;
+    background: rgba(0,0,0,0.6);
+    border: 1px solid pink;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    box-shadow: 0 0 15px #ff7edb;
+}
+
+/* 🌸 sparkles */
+.flower { position: fixed; font-size: 18px; animation: pop 1s ease-out forwards; pointer-events: none; }
+@keyframes pop { 0% {transform:scale(0);opacity:1;} 100% {transform:scale(2);opacity:0;} }
+
+/* Buttons */
+#finalBtn, #surpriseBtn {
+    display: none;
+    margin-top: 25px;
+    padding: 14px 28px;
+    font-size: 17px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+}
+#finalBtn { background: linear-gradient(45deg,#ff4ecd,#ff7edb); color:white; box-shadow:0 0 20px #ff7edb;}
+#surpriseBtn { background: linear-gradient(45deg,#ff9a9e,#fad0c4); color:black; box-shadow:0 0 20px #fff; animation: glowPulse 1.5s infinite alternate;}
+@keyframes glowPulse { from{box-shadow:0 0 10px #fff;} to{box-shadow:0 0 25px #ff7edb;} }
+
+/* Letter */
+#letter {
+    display:none;
+    position:fixed;
+    top:50%; left:50%;
+    transform:translate(-50%,-50%);
+    background:rgba(0,0,30,0.95);
+    padding:30px;
+    border-radius:15px;
+    max-width:350px;
+    box-shadow:0 0 25px pink;
+}
+
+/* Hearts */
+.heart { position:fixed; font-size:20px; animation:floatUp 3s linear forwards; }
+@keyframes floatUp { from{transform:translateY(0);opacity:1;} to{transform:translateY(-300px);opacity:0;} }
+
+/* 🐱 Cat system */
+#catZone {
+    position: fixed;
+    right: 20px;
+    bottom: 30px;
+    font-size: 35px;
+    cursor: pointer;
+    animation: glowPulse 2s infinite alternate;
+}
+#catBox {
+    display:none;
+    position:fixed;
+    right:20px;
+    bottom:100px;
+    background:rgba(0,0,40,0.95);
+    padding:15px;
+    border-radius:15px;
+    box-shadow:0 0 20px pink;
+    width:200px;
+}
+#catFace { font-size:50px; animation:bounce 1s infinite alternate; }
+@keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-6px);} }
+#passwordBox { display:none; margin-top:10px; }
+#passwordBox button { margin-top:6px; padding:5px 10px; border:none; border-radius:10px; background:pink; cursor:pointer;}
+</style>
+</head>
+
+<body>
+
+<h1>🌙 Open My Secret Promises 💖</h1>
+
+<div class="container">
+    <div class="envelope" onclick="openEnvelope(0)">💌 Promise 1</div>
+    <div class="envelope" onclick="openEnvelope(1)">💌 Promise 2</div>
+    <div class="envelope" onclick="openEnvelope(2)">💌 Promise 3</div>
+</div>
+
+<div class="message" id="msg0">I promise to always respect your feelings 💞</div>
+<div class="message" id="msg1">I promise to stay beside you in happy and hard times 🌸</div>
+<div class="message" id="msg2">I promise to never stop choosing you every day ✨</div>
+
+<button id="finalBtn" onclick="showFinal()">💖 One Last Thing</button>
+<button id="surpriseBtn" onclick="window.open('surprise.html','_blank')">✨ Surprise Button</button>
+
+<div id="letter">
+    <h2>To You ❤️</h2>
+    <p>No matter where life takes us, I want you to know that choosing you was never a mistake - it's my favorite decision everyday. 🌌</p>
+</div>
+
+<!-- 🐱 Cat -->
+<div id="catZone" onclick="petCat()">🌸</div>
+<div id="catBox">
+    <div id="catFace">🐱</div>
+    <p id="catText">Pat this cat to get your password</p>
+    <div id="passwordBox">
+        <span id="passText">hennah&sookiehearts</span><br>
+        <button onclick="copyPass()">Copy</button>
+    </div>
+</div>
+
+<script>
+const password = "hennah&sookiehearts";
+let opened = 0;
+
+/* Envelope system */
+function openEnvelope(i) {
+    let input = prompt("Enter the secret password 💖");
+    if (input === password) {
+        let msg = document.getElementById("msg"+i);
+        if (msg.style.display !== "block") {
+            msg.style.display = "block";
+            opened++;
+            if (opened === 3) {
+                document.getElementById("finalBtn").style.display = "inline-block";
+            }
+        }
+    } else alert("Wrong password 😢");
+}
+
+/* Rain */
+for (let i = 0; i < 80; i++) {
+    let drop = document.createElement("div");
+    drop.classList.add("rain");
+    drop.style.left = Math.random() * 100 + "vw";
+    drop.style.animationDuration = (Math.random()*2+1) + "s";
+    drop.style.opacity = Math.random();
+    document.body.appendChild(drop);
+}
+
+/* Sparkles */
+document.addEventListener("click", function(e) {
+    let flower = document.createElement("div");
+    flower.className = "flower";
+    flower.innerText = "🌸";
+    flower.style.left = e.clientX + "px";
+    flower.style.top = e.clientY + "px";
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 1000);
+});
+
+/* Final step */
+function showFinal() {
+    document.body.style.background = "radial-gradient(circle, #1a0033, #000)";
+    document.getElementById("letter").style.display = "block";
+    for (let i=0;i<40;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerText="❤️";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="80vh";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),3000);
+    }
+    setTimeout(()=>document.getElementById("surpriseBtn").style.display="inline-block",5000);
+}
+
+/* 🐱 Cat logic */
+let pats = 0;
+function petCat() {
+    document.getElementById("catBox").style.display = "block";
+    pats++;
+    if (pats === 1) catText.innerText = "Pat more 🐾";
+    else if (pats === 2) catText.innerText = "More more 😼";
+    else if (pats === 3) {
+        catText.innerText = "Okay okay! Here's the secret password!";
+        passwordBox.style.display = "block";
+        speechSynthesis.speak(new SpeechSynthesisUtterance("hennah and sookie hearts"));
+    }
+}
+
+function copyPass() {
+    navigator.clipboard.writeText("hennah&sookiehearts");
+    alert("Password copied 💖");
+}
+</script>
+
+</body>
+</html>

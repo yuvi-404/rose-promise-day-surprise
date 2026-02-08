@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Rose For You</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+/* FIRST SCREEN */
+#firstScreen {
+    height: 100vh;
+    background: radial-gradient(circle at center, #2b0000, #000000);
+    color: white;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+h1 {
+    margin-top: 70px;
+    font-size: 3rem;
+    color: #ff4d6d;
+    text-shadow: 0 0 15px #ff1a40;
+}
+
+.subtitle {
+    margin-top: 10px;
+    opacity: 0;
+    transition: 2s;
+}
+
+button {
+    padding: 14px 30px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    transition: 0.3s;
+}
+
+#yesBtn {
+    background: linear-gradient(45deg, #ff0033, #990000);
+    color: white;
+    left: 40%;
+    top: 60%;
+}
+
+#noBtn {
+    background: #333;
+    color: white;
+    left: 55%;
+    top: 60%;
+}
+
+/* FLOATING ROSES */
+.falling-rose {
+    position: absolute;
+    top: -10vh;
+    font-size: 24px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+/* SECOND SCREEN */
+#secondScreen {
+    display: none;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    text-align: center;
+    color: #5a001f;
+    padding-top: 120px;
+    animation: fadeIn 2s ease forwards;
+}
+
+#secondScreen h2 {
+    font-size: 2.5rem;
+}
+
+#secondScreen p {
+    font-size: 1.3rem;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.nextBtn {
+    margin-top: 50px;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff4d6d, #ff1a40);
+    color: white;
+    box-shadow: 0 0 15px #ff4d6d;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="firstScreen">
+    <h1>A Rose For my Hennah ji <3 🌹</h1>
+    <div class="subtitle" id="sub">Every rose carries a feeling…</div>
+
+    <button id="yesBtn" onclick="acceptRose()">Accept This Rose</button>
+    <button id="noBtn" onclick="moveButton()">Decline This Rose</button>
+</div>
+
+<div id="secondScreen">
+    <h2>Thank you, sweetheart 🌸</h2>
+    <p>
+        You are the most beautiful rose in my garden — rare, gentle, and impossible not to cherish.  
+        Some flowers bloom for a season… but you make every moment feel like spring. 🌷
+    </p>
+    <button class="nextBtn" onclick="goNext()">Continue to Propose Day 💍</button>
+</div>
+
+<script>
+setTimeout(() => {
+    document.getElementById("sub").style.opacity = 1;
+}, 1200);
+
+function acceptRose() {
+    document.getElementById("firstScreen").style.display = "none";
+    document.getElementById("secondScreen").style.display = "block";
+}
+
+function goNext() {
+    window.location.href = "propose.html";
+}
+
+const texts = [
+    "It broke me… say yes already 💔",
+    "Accept this rose anyway 🌹",
+    "Please press yes 🥺",
+    "Please sweetheart ❤️"
+];
+
+let count = 0;
+
+function moveButton() {
+    let btn = document.getElementById("noBtn");
+    btn.style.left = Math.random() * 80 + "vw";
+    btn.style.top = Math.random() * 80 + "vh";
+    btn.innerText = texts[count % texts.length];
+    count++;
+}
+
+/* CREATE FALLING ROSES */
+for (let i = 0; i < 25; i++) {
+    let rose = document.createElement("div");
+    rose.classList.add("falling-rose");
+    rose.innerHTML = "🌹";
+    rose.style.left = Math.random() * 100 + "vw";
+    rose.style.animationDuration = (5 + Math.random() * 5) + "s";
+    rose.style.fontSize = (20 + Math.random() * 20) + "px";
+    document.getElementById("firstScreen").appendChild(rose);
+}
+</script>
+
+</body>
+</html>

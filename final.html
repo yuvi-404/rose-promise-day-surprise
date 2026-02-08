@@ -1,0 +1,181 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+<meta charset="UTF-8">  
+<title>Love Sky 💞</title>  
+  
+<style>  
+body{  
+    margin:0;  
+    overflow:hidden;  
+    font-family:'Segoe UI',sans-serif;  
+    background:black;  
+    color:white;  
+}  
+  
+/* ⭐ STAR LAYER */  
+.stars{  
+    position:fixed;  
+    width:100%;  
+    height:100%;  
+    background:  
+        radial-gradient(2px 2px at 20% 30%, white, transparent),  
+        radial-gradient(1.5px 1.5px at 70% 80%, white, transparent),  
+        radial-gradient(2px 2px at 40% 60%, white, transparent),  
+        radial-gradient(1.5px 1.5px at 90% 20%, white, transparent),  
+        radial-gradient(2px 2px at 10% 90%, white, transparent);  
+    animation: twinkle 4s infinite alternate;  
+    z-index:0;  
+}  
+  
+@keyframes twinkle{  
+    from{opacity:0.6;}  
+    to{opacity:1;}  
+}  
+  
+/* 💖 FLOATING HEARTS */  
+.love{  
+    position:absolute;  
+    font-weight:bold;  
+    white-space:nowrap;  
+    text-shadow:0 0 8px #ff4ecd,0 0 16px #ff1aa8;  
+    animation:floatUp linear infinite;  
+    z-index:1;  
+}  
+  
+@keyframes floatUp{  
+    0%{transform:translateY(100vh) translateX(0);opacity:0;}  
+    50%{transform:translateY(50vh) translateX(25px);opacity:1;}  
+    100%{transform:translateY(-20vh) translateX(-25px);opacity:0;}  
+}  
+  
+/* 💌 SEND BUTTON */  
+#destroyBtn{  
+    display:none;  
+    position:fixed;  
+    bottom:20px;  
+    left:50%;  
+    transform:translateX(-50%);  
+    padding:12px 25px;  
+    border:none;  
+    border-radius:25px;  
+    font-size:16px;  
+    background:red;  
+    color:white;  
+    box-shadow:0 0 15px white;  
+    cursor:pointer;  
+    z-index:999;  
+}  
+</style>  
+</head>  
+  
+<body>  
+  
+<div class="stars"></div>  
+<button id="destroyBtn" onclick="sendHearts()">Send hearts to your lover 💌</button>  
+  
+<script>  
+const phrases = [  
+"💖", "❤️", "💞", "💕", "💓", "💗",  
+"I love you", "You are my star ⭐",  
+"Always with you 🌌", "Proud of you 🌟",  
+"I love you ❤️",  
+"I love you so much 💖",  
+"I love you hennah ji 🌸",  
+"All the very best for your exam ✨",  
+"Slay your examination 💅",  
+"You can do it 💯",  
+"Study harder every day 📚",  
+"From this distance I never stop loving you 🌌",  
+"You are my favorite person 💞",  
+"Proud of you always 🌟",  
+"Future topper energy 🔥",  
+"Believe in yourself 💫"];  
+  
+function createLove(){  
+    let text=document.createElement("div");  
+    text.className="love";  
+    text.innerText=phrases[Math.floor(Math.random()*phrases.length)];  
+    text.style.left=Math.random()*100+"vw";  
+    text.style.animationDuration=(Math.random()*6+6)+"s";  
+    text.style.fontSize=(Math.random()*14+18)+"px";  
+    document.body.appendChild(text);  
+    setTimeout(()=>text.remove(),12000);  
+}  
+  
+setInterval(createLove,900);  
+  
+/* show button after 30 sec */  
+setTimeout(()=>{  
+    document.getElementById("destroyBtn").style.display="block";  
+},30000);  
+  
+/* 💞 NEW LOVE SENDING ENDING */  
+function sendHearts() {  
+
+    document.body.innerHTML = `  
+        <div class="stars"></div>
+        <div id="sendScreen" style="
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            text-align:center;
+            font-family:'Segoe UI',sans-serif;
+            color:white;
+        ">
+            <h1 id="mainText" style="font-size:32px;">
+                Sending your heart to Sookie Yunush....... 💞
+            </h1>
+
+            <div class="loader"></div>
+        </div>
+    `;
+
+    const style = document.createElement("style");
+    style.innerHTML = `
+        .loader {
+            margin-top:25px;
+            border:6px solid rgba(255,255,255,0.2);
+            border-top:6px solid #ff4ecd;
+            border-radius:50%;
+            width:55px;
+            height:55px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    setTimeout(() => {
+        document.getElementById("mainText").innerHTML =
+            "Sent from Hennah Yunush 📤";
+    }, 4000);
+
+    setTimeout(() => {
+        document.body.innerHTML = `
+            <div style="
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                height:100vh;
+                font-size:30px;
+                text-align:center;
+                font-family:'Segoe UI',sans-serif;
+                color:white;
+                background:black;
+            ">
+                Received by Sookie Yunush 💖
+            </div>
+        `;
+    }, 7000);
+}
+</script>  
+  
+</body>  
+</html>
